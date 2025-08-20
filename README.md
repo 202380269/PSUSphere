@@ -56,10 +56,8 @@
   </style>
 </head>
 <body>
-  <header>
     <h1>PSUSphere</h1>
     <p>A Student Organization Management System built with Django</p>
-  </header>
   <main>
     <section>
       <h2>📖 About</h2>
