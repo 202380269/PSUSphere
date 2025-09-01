@@ -1,6 +1,3 @@
-from pathlib import Path
-import os
-
 """
 Django settings for projectsite project.
 
@@ -28,7 +25,7 @@ SECRET_KEY = 'django-insecure-sn+-d)@y)1de=ekbps1@-v&#xxdd-u^+yj*-pj8r$b66jzfzoi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['psusphere.pythonanywhere.com.com', '127.0.0.1']
+ALLOWED_HOSTS = ['psusphere.pythonanywhere.com.com', '127.0.0.']
 
 
 # Application definition
@@ -79,7 +76,7 @@ WSGI_APPLICATION = 'projectsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -118,8 +115,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/home/jcremandaban/PSUSphere/static'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
