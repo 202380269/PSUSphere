@@ -1,44 +1,22 @@
-from django.db import models
+from django.contrib import admin
+from .models import College, Program, Student, Organization, OrgMember
 
-class College(models.Model):
-    college_name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+@admin.register(College)
+class CollegeAdmin(admin.ModelAdmin):
+    list_display = ("id", "college_name", "description")
 
-    def __str__(self):
-        return self.college_name
+@admin.register(Program)
+class ProgramAdmin(admin.ModelAdmin):
+    list_display = ("id", "program_name", "college", "description")
 
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ("id", "first_name", "last_name", "program")
 
-class Program(models.Model):
-    program_name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    college = models.ForeignKey(College, on_delete=models.CASCADE)
+@admin.register(Organization)
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "college", "description")
 
-    def __str__(self):
-        return self.program_name
-
-
-class Student(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    program = models.ForeignKey(Program, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-
-class Organization(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    college = models.ForeignKey(College, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
-class OrgMember(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
-    position = models.CharField(max_length=100, blank=True)
-
-    def __str__(self):
-        return f"{self.student} - {self.organization}"
+@admin.register(OrgMember)
+class OrgMemberAdmin(admin.ModelAdmin):
+    list_display = ("id", "student", "organization", "position")
