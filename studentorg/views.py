@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from .models import Organization, College, Program, Student, OrgMember
 from .forms import OrganizationForm, CollegeForm, ProgramForm, StudentForm, OrgMemberForm
 
-
 # Home Page
 class HomePageView(ListView):
     model = Organization
