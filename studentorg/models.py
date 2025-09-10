@@ -1,49 +1,44 @@
 from django.db import models
 
-class BaseModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True   
-
-
-class College(BaseModel):
-    college_name = models.CharField(max_length=150)
+class College(models.Model):
+    college_name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.college_name
 
 
-class Program(BaseModel):
-    prog_name = models.CharField(max_length=150)
+class Program(models.Model):
+    program_name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
     college = models.ForeignKey(College, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.prog_name
+        return self.program_name
 
 
-class Organization(BaseModel):
-    name = models.CharField(max_length=250)
-    college = models.ForeignKey(College, null=True, blank=True, on_delete=models.CASCADE)
-    description = models.CharField(max_length=500)
+class Student(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+
+class Organization(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
-class Student(BaseModel):
-    student_id = models.CharField(max_length=15)
-    lastname = models.CharField(max_length=25)
-    firstname = models.CharField(max_length=25)
-    middlename = models.CharField(max_length=25, blank=True, null=True)
-    program = models.ForeignKey(Program, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.lastname}, {self.firstname}"
-
-
-class OrgMember(BaseModel):
+class OrgMember(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
-    date_joined = models.DateField()
+    position = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return f"{self.student} - {self.organization}"
