@@ -27,7 +27,7 @@ class OrganizationUpdateView(UpdateView):
     form_class = OrganizationForm
     template_name = 'org_form.html'
     success_url = reverse_lazy('organization-list')
-    
+
 class OrganizationDeleteView(DeleteView):
     model = Organization
     template_name = 'org_del.html'
