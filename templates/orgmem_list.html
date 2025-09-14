@@ -14,9 +14,9 @@
                     <br />
                     <div class="col-md-12 row">
                         <div class="col-md-6">
-                            <form class="navbar-left navbar-form nav-search mr-md-3" action="">
+                            <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'org-member-list' %}">
                                 <div class="input-group">
-                                    <input type="text" placeholder="Search ..." class="form-control" />
+                                    <input type="text" placeholder="Search ..." class="form-control" name="q" />    
                                     <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="la la-search search-icon"></i>
@@ -31,6 +31,26 @@
                             </div>
                         </div>
                     </div>
+                     <div class="col-md-12">
+            <form method="get" class="row g-2 align-items-center">
+              <div class="col-auto">
+                <label for="smallSelect" class="col-form-label">Sort by</label>
+              </div>
+              <div class="col-auto">
+                <select class="form-control form-control-sm" id="smallSelect" name="sort_by">
+                  <option value="student__firstname" {% if request.GET.sort_by == "student__firstname" %}selected{% endif %}>First Name</option>
+                  <option value="student__middlename" {% if request.GET.sort_by == "student__middlename" %}selected{% endif %}>Middle Name</option>
+                  <option value="student__lastname" {% if request.GET.sort_by == "student__lastname" %}selected{% endif %}>Last Name</option>
+                  <option value="date_joined" {% if request.GET.sort_by == "date_joined" %}selected{% endif %}>Date Joined</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm btn-rounded">Sort</button>
+              </div>
+            </form>
+          </div>
+
+
                     <div class="card-body">
                         <table class="table table-striped mt-3">
                             <thead>
