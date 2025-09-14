@@ -43,4 +43,3 @@ urlpatterns = [
     path("program_list/<pk>", ProgramUpdateView.as_view(), name='program-update'),
     path('program_list/<pk>/delete', ProgramDeleteView.as_view(), name='program-delete'), 
 ]
-
