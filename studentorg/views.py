@@ -4,11 +4,27 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from studentorg.models import Organization, College, Program, Student, OrgMember
 from studentorg.forms import OrganizationForm, CollegeForm, ProgramForm, StudentForm, OrganizationMemberForm
 from django.urls import reverse_lazy
+from django.utils import timezone
 
-class HomePageView(ListView):
+class HomePageView(LoginRequiredMixin, ListView):
     model = Organization
     context_object_name = 'home'
     template_name = "home.html"
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context["total_students"] = Student.objects.count()
+    
+    today = timezone.now().date()
+    count = (
+        OrgMember.objects.filter(date_joined__year=today.year)
+        .values("student")
+        .distinct()
+        .count()
+    )
+    context["students_joined_this_year"] = count
+
+    return context
+
 
 class OrganizationList(ListView):
     model = Organization
