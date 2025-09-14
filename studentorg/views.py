@@ -31,6 +31,7 @@ class OrganizationList(ListView):
     context_object_name = 'organization'
     template_name = 'org_list.html'
     paginate_by = 5
+    ordering = ["college__college_name","name"]
     
 def get_queryset(self):
     qs = super().get_queryset()  
