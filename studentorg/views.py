@@ -6,7 +6,7 @@ from studentorg.forms import OrganizationForm, CollegeForm, ProgramForm, Student
 from django.urls import reverse_lazy
 from django.utils import timezone
 
-class HomePageView(LoginRequiredMixin, ListView):
+class HomePageView(ListView):
     model = Organization
     context_object_name = 'home'
     template_name = "home.html"
