@@ -3,19 +3,17 @@
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">Home</h4>
+        <h4 class="page-title">Programs</h4>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Delete Organization</div>
+                        <div class="card-title">{% if object %}Update Program{% else %}Add New Program{% endif %}</div>
                         <div class="card-category">Page Subtitle</div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="card-body">
-                            <form action="" method="post" novalidate>
-                                <p>Are you sure you want to delete "{{ object }}"?</p>
+                            <form class="" action="" method="post" novalidate>
                                 {% csrf_token %}
                                 {% include 'includes/form.html' %}
                                 <div class="form-group">
@@ -26,7 +24,6 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
