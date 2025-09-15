@@ -19,6 +19,7 @@ from django.urls import path,  include
 from studentorg.views import HomePageView, OrganizationList, OrganizationCreateView,OrganizationUpdateView, OrganizationDeleteView, OrganizationMemberList, OrganizationMemberCreateView, OrganizationMemberDeleteView, OrganizationMemberUpdateView, StudentCreateView, StudentDeleteView, StudentListView, StudentUpdateView, CollegeCreateView, CollegeDeleteView, CollegeListView, CollegeUpdateView, ProgramCreateView, ProgramDeleteView, ProgramListView, ProgramUpdateView
 from studentorg import views
 from django.views.generic import TemplateView
+from django.contrib.sites.models import Site
 
 urlpatterns = [
     path("admin/", admin.site.urls),

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'studentorg',
     'widget_tweaks',
-        'django.contrib.sites',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -49,12 +49,13 @@ INSTALLED_APPS = [
 ]
 
 if "pythonanywhere" in socket.gethostname():
-    SITE_ID = 2 # production site (psusphere.pythonanywhere.com)
+    SITE_ID = 1  # production site (JCBRON.pythonanywhere.com) - Replace 1 with the correct SITE_ID from your production database
 else:
-    SITE_ID = 1 # local site (127.0.0.1:8000)
+    SITE_ID = 2  # local site (127.0.0.1:8000) - Replace 2 with the correct SITE_ID from your local database
+
 AUTHENTICATION_BACKENDS = [
-'django.contrib.auth.backends.ModelBackend',
-'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 MIDDLEWARE = [
