@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7qyop6j+b3)z(39!-rhuwfug-sb89p1n=r@s*eq=x@(c_h6ka$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['JCBRON.pythonanywhere.com','localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['jcbron.pythonanywhere.com','localhost', '127.0.0.1']
 
 # Application definition
 
@@ -86,10 +86,11 @@ TEMPLATES = [
     },
 ]
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = (
-    BASE_DIR / 'static',
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Where collectstatic will put files
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 
 WSGI_APPLICATION = 'projectsite.wsgi.application'
