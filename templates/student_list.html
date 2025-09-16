@@ -13,18 +13,34 @@
                     </div>
                     <br />
                     <div class="col-md-12 row">
+                        <!-- 🔍 Search -->
                         <div class="col-md-6">
                             <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'student-list' %}">
                                 <div class="input-group">
-                                     <input type="text" placeholder="Search ..." class="form-control" name="q" />
+                                    <input type="text" placeholder="Search ..." class="form-control" name="q" value="{{ request.GET.q }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="la la-search search-icon"></i>
                                         </span>
                                     </div>
                                 </div>
+                                <!-- ⬆️⬇️ Sorting -->
+                                <div class="input-group mt-2">
+                                    <select class="form-control" name="sort_by">
+                                        <option value="">Sort by...</option>
+                                        <option value="lastname" {% if request.GET.sort_by == "lastname" %}selected{% endif %}>Last Name</option>
+                                        <option value="firstname" {% if request.GET.sort_by == "firstname" %}selected{% endif %}>First Name</option>
+                                        <option value="student_id" {% if request.GET.sort_by == "student_id" %}selected{% endif %}>Student ID</option>
+                                        <option value="program__prog_name" {% if request.GET.sort_by == "program__prog_name" %}selected{% endif %}>Program</option>
+                                        <option value="college__college_name" {% if request.GET.sort_by == "college__college_name" %}selected{% endif %}>College</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">Apply</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
+                        <!-- Add Student Button -->
                         <div class="col-md-6">
                             <div class="pull-right">
                                 <a href="{% url 'student-add' %}" class="btn btn-success btn-rounded">Add Student</a>
@@ -32,6 +48,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <!-- 📋 Table -->
                         <table class="table table-striped mt-3">
                             <thead>
                                 <tr>
@@ -48,10 +65,10 @@
                                     <td>{{ object.student_id }}</td>
                                     <td>{{ object.lastname }}</td>
                                     <td>{{ object.firstname }}</td>
-                                    <td>{{ object.program }}</td>
+                                    <td>{{ object.program.prog_name }}</td>
                                     <td>
-                                        <a href="student_list/{{ object.id }}">Edit</a>
-                                        <a href="student_list/{{ object.id }}/delete" class="text-danger">Delete</a>
+                                        <a href="{% url 'student-update' object.id %}">Edit</a>
+                                        <a href="{% url 'student-delete' object.id %}" class="text-danger">Delete</a>
                                     </td>
                                 </tr>
                                 {% empty %}
@@ -63,6 +80,7 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+                        <!-- 📄 Pagination -->
                         {% include 'includes/pagination.html' %}
                     </div>
                 </div>
