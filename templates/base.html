@@ -136,6 +136,9 @@
 							<img src="{% static 'img/profile.jpg' %}">
 						</div>
 						<div class="info">
+							<span>{{ request.user.username }}</span>
+							<h4>{{ request.user.username }}</h4>
+							{{ request.user.username }}
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
 									{{ request.user.username }}
