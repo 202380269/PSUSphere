@@ -54,14 +54,13 @@ register" aria-selected="false">Register</a>
 {% csrf_token %}
 <div class="text-center mb-3">
 <p>Sign in with:</p>
-<a href="{% provider_login_url 'google' %}" class="btn btn-link btn-floating mx-1">
-<i class="fab fa-google"></i>
+<a href="{% provider_login_url 'google' %}" class="btn btn-link btn-floating mx-1" title="Sign in with Google">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style="width:24px; height:24px;" />
 </a>
-<a href="#" class="btn btn-link btn-floating mx-1">
-<i class="fab fa-github"></i>
+<a href="{% provider_login_url 'github' %}" class="btn btn-link btn-floating mx-1" title="Sign in with GitHub">
+<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width:24px; height:24px;" />
 </a>
 </div>
-<p class="text-center">or:</p>
 <!-- Username / Email -->
 <div data-mdb-input-init class="form-outline mb-4">
 <input type="text" name="login" id="id_login" class="form-control" required />
@@ -100,16 +99,7 @@ register" aria-selected="false">Register</a>
 <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
 <form method="post" action="{% url 'account_signup' %}">
 {% csrf_token %}
-<div class="text-center mb-3">
-<p>Sign up with:</p>
-<a href="{% provider_login_url 'google' %}" class="btn btn-link btn-floating mx-1">
-<i class="fab fa-google"></i>
-</a>
-<a href="#" class="btn btn-link btn-floating mx-1">
-<i class="fab fa-github"></i>
-</a>
-</div>
-<p class="text-center">or:</p>
+<!-- Social login removed to avoid configuration issues -->
 <!-- Username -->
 <div data-mdb-input-init class="form-outline mb-4">
 <input type="text" name="username" id="registerUsername" class="form-control" required />
@@ -142,4 +132,4 @@ register" aria-selected="false">Register</a>
 <!-- MDB + Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 </body>
-</html>
+</html> 
