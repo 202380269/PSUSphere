@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7qyop6j+b3)z(39!-rhuwfug-sb89p1n=r@s*eq=x@(c_h6ka$'
+SECRET_KEY = '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'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,11 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
 ]
 
-# Set SITE_ID depending on environment
-if "pythonanywhere" in socket.gethostname():
-    SITE_ID = 2  # production site
-else:
-    SITE_ID = 1  # local site
+SITE_ID = 4  # production site
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
