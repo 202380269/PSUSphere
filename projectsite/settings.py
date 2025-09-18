@@ -27,7 +27,7 @@ SECRET_KEY = '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'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['JCBRON.pythonanywhere.com','localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['jcbron.pythonanywhere.com','localhost', '127.0.0.1']
 
 # Application definition
 
