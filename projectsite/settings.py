@@ -48,7 +48,15 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
 ]
 
+<<<<<<< HEAD
 SITE_ID = 1  # local site
+=======
+# Set SITE_ID depending on environment
+if "pythonanywhere" in socket.gethostname():
+    SITE_ID = 4  # production site
+else:
+    SITE_ID = 1  # local site
+>>>>>>> e9f23fc (Update SITE_ID to 4 for production)
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -146,12 +154,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Login / Logout
-LOGIN_URL = '/accounts/login/' 
-LOGIN_REDIRECT_URL = '/' 
-LOGOUT_REDIRECT_URL = '/accounts/login/' 
-ACCOUNT_LOGOUT_REDIRECT_URL = '/' 
-ACCOUNT_LOGOUT_ON_GET = True 
-ACCOUNT_LOGIN_METHODS = {"username", "email"} 
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGIN_METHODS = {"username", "email"}
 ACCOUNT_SIGNUP_FIELDS = [
     "username*",
     "email*",
