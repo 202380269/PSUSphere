@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'studentorg',
     'widget_tweaks',
-    'django.contrib.sites',
+    'django.contrib.sites',  # Required for Allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -48,10 +48,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
 ]
 
+# Set SITE_ID depending on environment
 if "pythonanywhere" in socket.gethostname():
-    SITE_ID = 1  # production site (JCBRON.pythonanywhere.com) - Replace 1 with the correct SITE_ID from your production database
+    SITE_ID = 2  # production site
 else:
-    SITE_ID = 2  # local site (127.0.0.1:8000) - Replace 2 with the correct SITE_ID from your local database
+    SITE_ID = 1  # local site
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -85,13 +86,13 @@ TEMPLATES = [
         },
     },
 ]
+
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Where collectstatic will put files
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
 
 WSGI_APPLICATION = 'projectsite.wsgi.application'
 
@@ -146,8 +147,9 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Login / Logout
 LOGIN_URL = '/accounts/login/' 
 LOGIN_REDIRECT_URL = '/' 
 LOGOUT_REDIRECT_URL = '/accounts/login/' 
@@ -155,8 +157,8 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True 
 ACCOUNT_LOGIN_METHODS = {"username", "email"} 
 ACCOUNT_SIGNUP_FIELDS = [
-"username*",
-"email*",
-"password1*",
-"password2*",
+    "username*",
+    "email*",
+    "password1*",
+    "password2*",
 ]

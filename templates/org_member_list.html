@@ -9,13 +9,13 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">List of Students</div>
+            <div class="card-title">List of Org Members</div>
             <div class="card-category">Page Subtitle</div>
           </div>
           <br />
           <div class="col-md-12 row">
               <div class="col-md-6">
-                  <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'student-list' %}">
+                  <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'organization-member-list' %}">
                       <div class="input-group">
                           <input type="text" placeholder="Search ..." class="form-control" name="q" />
                           <div class="input-group-append">
@@ -28,34 +28,48 @@
               </div>
               <div class="col-md-6">
                   <div class="pull-right">
-                      <a href="{% url 'student-add' %}" class="btn btn-success btn-rounded">Add Student</a>
+                      <a href="{% url 'organization-member-add' %}" class="btn btn-success btn-rounded">Add Org Member</a>
                   </div>
               </div>
           </div>
+
+          <div class="col-md-12">
+            <form method="get" class="row g-2 align-items-center">
+              <div class="col-auto">
+                <label for="smallSelect" class="col-form-label">Sort by</label>
+              </div>
+              <div class="col-auto">
+                <select class="form-control form-control-sm" id="smallSelect" name="sort_by">
+                  <option value="student__firstname" {% if request.GET.sort_by == "student__firstname" %}selected{% endif %}>First Name</option>
+                  <option value="student__middlename" {% if request.GET.sort_by == "student__middlename" %}selected{% endif %}>Middle Name</option>
+                  <option value="student__lastname" {% if request.GET.sort_by == "student__lastname" %}selected{% endif %}>Last Name</option>
+                  <option value="date_joined" {% if request.GET.sort_by == "date_joined" %}selected{% endif %}>Date Joined</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm btn-rounded">Sort</button>
+              </div>
+            </form>
+          </div>
+
 
           <div class="card-body">
             <table class="table table-striped mt-3">
               <thead>
                 <tr>
-                  <th scope="col">Student ID</th>
-                  <th scope="col">Last Name</th>
-                  <th scope="col">First Name</th>
-                  <th scope="col">Middle Name</th>
-                  <th scope="col">Program</th>
+                  <th scope="col">Student</th>
+                  <th scope="col">Organization</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {% for object in object_list %}
                 <tr>
-                  <td>{{ object.student_id }}</td>
-                  <td>{{ object.lastname }}</td>
-                  <td>{{ object.firstname }}</td>
-                  <td>{{ object.middlename }}</td>
-                  <td>{{ object.program }}</td>
+                  <td>{{ object.student }}</td>
+                  <td>{{ object.organization }}</td>
                   <td>
-                      <a href="students_list/{{ object.id }}">Edit</a>
-                      <a href="students_list/{{ object.id }}/delete" class="text-danger">Delete</a>
+                      <a href="{% url 'organization-member-update' object.id %}">Edit</a>
+                      <a href="{% url 'organization-member-delete' object.id %}" class="text-danger">Delete</a>
                   </td>
                 </tr>
                 {% empty %}

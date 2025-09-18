@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="{% static 'css/ready.css' %}">
-	<link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
 </head>
 <body>
 	<div class="wrapper">
@@ -25,9 +25,9 @@
 			<nav class="navbar navbar-header navbar-expand-lg">
 				<div class="container-fluid">
 					
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
+					<form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'global_search' %}" method="get">
 						<div class="input-group">
-							<input type="text" placeholder="Search ..." class="form-control">
+							<input type="text" placeholder="Search ..." class="form-control" name="q" value="{{ request.GET.q }}">
 							<div class="input-group-append">
 								<span class="input-group-text">
 									<i class="la la-search search-icon"></i>
@@ -78,7 +78,7 @@
 										</a>
 										<a href="#">
 											<div class="notif-img"> 
-												<img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle">
+												<img src="../assets/img/profile2.jpg" alt="Img Profile">
 											</div>
 											<div class="notif-content">
 												<span class="block">
@@ -145,7 +145,7 @@
 							</a>
 							<div class="clearfix"></div>
 
-							<div class="collapse in" id="collapseExample" aria-expanded="true">
+							<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
 										<a href="#profile">
@@ -168,7 +168,7 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item">
-							<a href="index.html">
+							<a href="{% url 'home' %}">
 								<i class="la la-dashboard"></i>
 								<p>Dashboard</p>
 							</a>
@@ -196,21 +196,46 @@
 								<i class="la la-bell"></i>
 								<p>College</p>
 							</a>
-
 						</li>
-						<li class="nav-item active">
+						<li class="nav-item">
 							<a href="{% url 'program-list' %}">
 								<i class="la la-font"></i>
 								<p>Program</p>
-							
 							</a>
-
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="main-panel">
                 {% block content %}
-                 {% endblock %}
+                {% endblock %}
+				<footer class="footer">
+					<div class="container-fluid">
+						<nav class="pull-left">
+							<ul class="nav">
+								<li class="nav-item">
+									<a class="nav-link" href="http://www.themekita.com">
+										ThemeKita
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">
+										Help
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">
+										Licenses
+									</a>
+								</li>
+							</ul>
+						</nav>
+						<div class="copyright ml-auto">
+							2018, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
+						</div>				
+					</div>
+				</footer>
+			</div>
 		</div>
 	</div>
 	<!-- Modal -->
@@ -240,7 +265,7 @@
 <script src="{% static 'js/core/popper.min.js' %}"></script>
 <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/plugin/chartist/chartist.min.js' %}"></script>
-<script src="{% static 'js/plugin/chartist/plugin.chartist-plugin-tooltip.min.js' %}"></script>
+<script src="{% static 'js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js' %}"></script>
 <script src="{% static 'js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
 <script src="{% static 'js/plugin/bootstrap-toggle/bootstrap-toggle.min.js' %}"></script>
 <script src="{% static 'js/plugin/jquery-mapael/jquery.mapael.min.js' %}"></script>
@@ -248,4 +273,5 @@
 <script src="{% static 'js/plugin/chart-circle/circles.min.js' %}"></script>
 <script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 <script src="{% static 'js/ready.min.js' %}"></script>
+
 </html>

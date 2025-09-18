@@ -1,102 +1,235 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <div class="content">
-    <div class="container-fluid">
-        <h4 class="page-title">Home</h4>
-<div class="row">
-  <div class="col-md-3">
-    <div class="card card-stats card-warning">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-users"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Students</p>
-              <h4 class="card-title">{{total_students}}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3">
-    <div class="card card-stats card-success">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-bar-chart"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Joined This Year</p>
-              <h4 class="card-title">{{students_joined_this_year}}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3">
-    <div class="card card-stats card-danger">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-newspaper-o"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Organizations</p>
-              <h4 class="card-title">{{total_organizations}}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3">
-    <div class="card card-stats card-primary">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-check-circle"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Order</p>
-              <h4 class="card-title">576</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Page Title</div>
-                        <div class="card-category">Page Subtitle</div>
-                    </div>
-                    <div class="card-body">Hello, World</div>
+  <div class="container-fluid">
+    <h4 class="page-title">Home</h4>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card card-stats card-warning">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="la la-users"></i>
                 </div>
+              </div>
+              <div class="col-7 d-flex align-items-center">
+                <div class="numbers">
+                  <p class="card-category">Students</p>
+                  <h4 class="card-title">{{total_students}}</h4>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card card-stats card-success">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="la la-bar-chart"></i>
+                </div>
+              </div>
+              <div class="col-7 d-flex align-items-center">
+                <div class="numbers">
+                  <p class="card-category">Joined This Year</p>
+                  <h4 class="card-title">{{students_joined_this_year}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card card-stats card-danger">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="la la-newspaper-o"></i>
+                </div>
+              </div>
+              <div class="col-7 d-flex align-items-center">
+                <div class="numbers">
+                  <p class="card-category">Organizations</p>
+                  <h4 class="card-title">{{total_organizations}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card card-stats card-primary">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="la la-check-circle"></i>
+                </div>
+              </div>
+              <div class="col-7 d-flex align-items-center">
+                <div class="numbers">
+                  <p class="card-category">Order</p>
+                  <h4 class="card-title">576</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    {% if query %}
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Search Results for "{{ query }}"</div>
+          </div>
+          <div class="card-body">
+            {% if results.students %}
+            <h5>Students</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Middle Name</th>
+                  <th>Program</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for student in results.students %}
+                <tr>
+                  <td>{{ student.student_id }}</td>
+                  <td>{{ student.lastname }}</td>
+                  <td>{{ student.firstname }}</td>
+                  <td>{{ student.middlename }}</td>
+                  <td>{{ student.program.prog_name }}</td>
+                  <td>
+                    <a href="{% url 'student-update' student.id %}">Edit</a>
+                    <a href="{% url 'student-delete' student.id %}" class="text-danger">Delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+
+            {% if results.colleges %}
+            <h5>Colleges</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>College Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for college in results.colleges %}
+                <tr>
+                  <td>{{ college.college_name }}</td>
+                  <td>
+                    <a href="{% url 'college-update' college.id %}">Edit</a>
+                    <a href="{% url 'college-delete' college.id %}" class="text-danger">Delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+
+            {% if results.programs %}
+            <h5>Programs</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Program Name</th>
+                  <th>College</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for program in results.programs %}
+                <tr>
+                  <td>{{ program.prog_name }}</td>
+                  <td>{{ program.college.college_name }}</td>
+                  <td>
+                    <a href="{% url 'program-update' program.id %}">Edit</a>
+                    <a href="{% url 'program-delete' program.id %}" class="text-danger">Delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+
+            {% if results.organizations %}
+            <h5>Organizations</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Organization Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for org in results.organizations %}
+                <tr>
+                  <td>{{ org.name }}</td>
+                  <td>
+                    <a href="{% url 'organization-update' org.id %}">Edit</a>
+                    <a href="{% url 'organization-delete' org.id %}" class="text-danger">Delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+
+            {% if results.org_members %}
+            <h5>Organization Members</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Organization</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for member in results.org_members %}
+                <tr>
+                  <td>{{ member.student.firstname }} {{ member.student.lastname }}</td>
+                  <td>{{ member.organization.name }}</td>
+                  <td>
+                    <a href="{% url 'organization-member-update' member.id %}">Edit</a>
+                    <a href="{% url 'organization-member-delete' member.id %}" class="text-danger">Delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+
+            {% if not results.students and not results.colleges and not results.programs and not results.organizations and not results.org_members %}
+            <p>No results found.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

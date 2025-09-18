@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} 
+{% load static %} 
 
 {% block content %}
 <div class="content">
@@ -9,14 +9,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Delete Organization</div>
+                        <div class="card-title">{% if object %}Update Organization Member {% else %} Add New Organization Member{% endif %}</div>
                         <div class="card-category">Page Subtitle</div>
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
                             <form class="" action="" method="post" novalidate>
-                                <p>Are you sure you want to delete "{{ object }}"?</p>
-                                {% csrf_token %}
+                                {% csrf_token %} 
                                 {% include 'includes/form.html' %}
                                 <div class="form-group">
                                     <div class="col-md-12 col-sm-3">
