@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.utils import timezone
+from django.shortcuts import render
+
 from .models import Organization, College, Program, Student, OrgMember
 from .forms import OrganizationForm, CollegeForm, ProgramForm, StudentForm, OrganizationMemberForm
 
@@ -236,3 +238,36 @@ class ProgramDeleteView(DeleteView):
     model = Program
     template_name = 'program_del.html'
     success_url = reverse_lazy('program-list')
+
+# Global Search View
+def global_search_view(request):
+    query = request.GET.get('q')
+    results = {
+        'organizations': None,
+        'students': None,
+        'org_members': None,
+    }
+    if query:
+        # Search Organizations
+        orgs = Organization.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
+        results['organizations'] = orgs
+
+        # Search Students
+        students = Student.objects.filter(
+            Q(student_id__icontains=query) |
+            Q(firstname__icontains=query) |
+            Q(lastname__icontains=query)
+        )
+        results['students'] = students
+
+        # Search Organization Members
+        org_members = OrgMember.objects.filter(
+            Q(student__firstname__icontains=query) |
+            Q(student__lastname__icontains=query) |
+            Q(organization__name__icontains=query)
+        )
+        results['org_members'] = org_members
+
+    return render(request, 'global_search_results.html', {'results': results, 'query': query})
