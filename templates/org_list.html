@@ -4,28 +4,64 @@
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">
-            {% if object %}Update Organization{% else %}Add New Organization{% endif %}
-        </h4>
+        <h4 class="page-title">Organizations</h4>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            {% if object %}Update Organization{% else %}Add New Organization{% endif %}
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="card-title">List of Organizations</div>
+                            <div class="card-category">All registered organizations</div>
                         </div>
+                        <a href="{% url 'organization-add' %}" class="btn btn-success btn-rounded">Add Organization</a>
                     </div>
+
                     <div class="card-body">
-                        <form method="post" novalidate>
-                            {% csrf_token %}
-                            {% include 'includes/form.html' %}
-                            <div class="form-group mt-3">
-                                <button type="submit" class="btn btn-primary btn-rounded">
-                                    {% if object %}Update{% else %}Submit{% endif %}
-                                </button>
-                                <a href="{% url 'organization-list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
+                        <form method="get" action="{% url 'organization-list' %}" class="mb-3 row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search by name, description, or college..." class="form-control">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" name="sort_by" onchange="this.form.submit()">
+                                    <option value="">Sort by...</option>
+                                    <option value="name" {% if request.GET.sort_by == "name" %}selected{% endif %}>Name</option>
+                                    <option value="college__college_name" {% if request.GET.sort_by == "college__college_name" %}selected{% endif %}>College</option>
+                                </select>
                             </div>
                         </form>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>College</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for org in object_list %}
+                                <tr>
+                                    <td>{{ org.name }}</td>
+                                    <td>{{ org.college.college_name }}</td>
+                                    <td>{{ org.description|default:"-" }}</td>
+                                    <td>
+                                        <a href="{% url 'organization-update' org.id %}" class="btn btn-sm btn-warning">Edit</a>
+                                        <a href="{% url 'organization-delete' org.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center">No organizations found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {% include 'includes/pagination.html' %}
                     </div>
                 </div>
             </div>
