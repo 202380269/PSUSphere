@@ -72,7 +72,7 @@ class OrganizationDeleteView(DeleteView):
 class OrganizationMemberList(ListView):
     model = OrgMember
     context_object_name = 'organizationmember'
-    template_name = 'orgmem_list.html'
+    template_name = 'org_member_list.html'
     paginate_by = 5
 
     def get_queryset(self):
