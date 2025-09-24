@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">Home</h4>
+        <h4 class="page-title">Programs</h4>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -14,7 +13,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
-                            <form class="" action="" method="post" novalidate>
+                            <form method="post" novalidate>
                                 <p>Are you sure you want to delete "{{ object }}"?</p>
                                 {% csrf_token %}
                                 {% include 'includes/form.html' %}
