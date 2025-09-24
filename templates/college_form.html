@@ -1,25 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">{% if object %}Update College{% else %}Add College{% endif %}</h4>
+        <h4 class="page-title">
+            {% if object %}Update College{% else %}Add New College{% endif %}
+        </h4>
+
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">{% if object %}Update College{% else %}Add College{% endif %}</div>
+                        <div class="card-title">
+                            {% if object %}Update College{% else %}Add New College{% endif %}
+                        </div>
                         <div class="card-category">Page Subtitle</div>
                     </div>
+
                     <div class="card-body">
                         <form method="post" novalidate>
                             {% csrf_token %}
                             {% include 'includes/form.html' %}
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-rounded">Submit</button>
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn btn-primary btn-rounded">
+                                    {% if object %}Update{% else %}Submit{% endif %}
+                                </button>
+                                <a href="{% url 'college_list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
