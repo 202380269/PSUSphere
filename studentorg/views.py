@@ -99,18 +99,18 @@ class OrganizationMemberList(ListView):
 class OrganizationMemberCreateView(CreateView):
     model = OrgMember
     form_class = OrganizationMemberForm
-    template_name = 'orgmem_form.html'
+    template_name = 'org_member_form.html'
     success_url = reverse_lazy('organization-member-list')
 
 class OrganizationMemberUpdateView(UpdateView):
     model = OrgMember
     form_class = OrganizationMemberForm
-    template_name = 'orgmem_form.html'
+    template_name = 'org_member_form.html'
     success_url = reverse_lazy('organization-member-list')
 
 class OrganizationMemberDeleteView(DeleteView):
     model = OrgMember
-    template_name = 'orgmem_del.html'
+    template_name = 'org_member_del.html'
     success_url = reverse_lazy('organization-member-list')
 
 # Student Views
