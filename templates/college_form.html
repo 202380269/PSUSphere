@@ -14,3 +14,22 @@
                         <div class="card-title">
                             {% if object %}Update College{% else %}Add New College{% endif %}
                         </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            {% include 'includes/form.html' %}
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn btn-primary btn-rounded">
+                                    {% if object %}Update{% else %}Submit{% endif %}
+                                </button>
+                                <a href="{% url 'college-list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
