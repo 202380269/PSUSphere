@@ -4,33 +4,21 @@
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">
-            {% if object %}Update Organization Member{% else %}Add New Organization Member{% endif %}
-        </h4>
-
+        <h4 class="page-title">Delete Organization Member</h4>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">
-                            {% if object %}Update Organization Member{% else %}Add New Organization Member{% endif %}
-                        </div>
-                        <div class="card-category">Page Subtitle</div>
+                        <div class="card-title">Confirm Delete</div>
                     </div>
-
-                    <div class="card-body">
-                        <form method="post" novalidate>
+                    <div class="card-body text-center">
+                        <p>Are you sure you want to remove <strong>{{ object.student.lastname }}, {{ object.student.firstname }}</strong> from <strong>{{ object.organization.name }}</strong>?</p>
+                        <form method="post">
                             {% csrf_token %}
-                            {% include 'includes/form.html' %}
-                            <div class="form-group mt-3">
-                                <button type="submit" class="btn btn-primary btn-rounded">
-                                    {% if object %}Update{% else %}Submit{% endif %}
-                                </button>
-                                <a href="{% url 'orgmember_list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
-                            </div>
+                            <button type="submit" class="btn btn-danger btn-rounded">Yes, Delete</button>
+                            <a href="{% url 'organization-member-list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
