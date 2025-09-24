@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <div class="content">
     <div class="container-fluid">
         <h4 class="page-title">Delete Organization</h4>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Confirm Deletion</div>
+                        <div class="card-title">Confirm Delete</div>
                     </div>
-                    <div class="card-body">
-                        <p>Are you sure you want to delete the organization named "{{ object.name }}"?</p>
+                    <div class="card-body text-center">
+                        <p>Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
                         <form method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-rounded">Confirm Delete</button>
+                            <button type="submit" class="btn btn-danger btn-rounded">Yes, Delete</button>
                             <a href="{% url 'organization-list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
                         </form>
                     </div>
