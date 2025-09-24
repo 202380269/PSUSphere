@@ -22,6 +22,7 @@ from studentorg.views import (
     StudentCreateView, StudentDeleteView, StudentListView, StudentUpdateView,
     CollegeCreateView, CollegeDeleteView, CollegeListView, CollegeUpdateView,
     ProgramCreateView, ProgramDeleteView, ProgramListView, ProgramUpdateView,
+    global_search_view # Import the new search view
 )
 
 from studentorg import views
@@ -38,7 +39,7 @@ urlpatterns = [
     path("index.html/", views.HomePageView.as_view(), name="index"),
 
     # Change this path to use the new GlobalSearchListView
-    path("search/", views.HomePageView.as_view(), name="global_search"),
+    path("search/", views.global_search_view, name="global-search"),
 
     # Organization
     path('organization_list/', OrganizationList.as_view(), name='organization-list'),
@@ -59,7 +60,7 @@ urlpatterns = [
     path('student_list/<pk>/delete/', StudentDeleteView.as_view(), name='student-delete'),
 
     # College
-    path('college_list/', CollegeListView.as_as_view(), name='college-list'),
+    path('college_list/', CollegeListView.as_view(), name='college-list'),
     path('college_list/add/', CollegeCreateView.as_view(), name='college-add'),
     path("college_list/<pk>/", CollegeUpdateView.as_view(), name='college-update'),
     path('college_list/<pk>/delete/', CollegeDeleteView.as_view(), name='college-delete'),
