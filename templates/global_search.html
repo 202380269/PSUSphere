@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+    <h4 class="page-title">Search Results</h4>
+
+    <!-- Search form -->
+    <form method="get" action="{% url 'global_search' %}" class="mb-3">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search everything..."
+               value="{{ query }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+
+    {% if query %}
+      <h5>🔹 Students</h5>
+      <ul>
+        {% for s in students %}
+          <li>
+            <a href="{% url 'student-update' s.id %}">
+              {{ s.lastname }}, {{ s.firstname }} ({{ s.student_id }})
+            </a>
+          </li>
+        {% empty %}
+          <li>No students found.</li>
+        {% endfor %}
+      </ul>
+
+      <h5>🔹 Organizations</h5>
+      <ul>
+        {% for o in organizations %}
+          <li>
+            <a href="{% url 'organization-update' o.id %}">
+              {{ o.org_name }}
+            </a>
+          </li>
+        {% empty %}
+          <li>No organizations found.</li>
+        {% endfor %}
+      </ul>
+
+      <h5>🔹 Programs</h5>
+      <ul>
+        {% for p in programs %}
+          <li>
+            <a href="{% url 'program-update' p.id %}">
+              {{ p.prog_code }} - {{ p.prog_name }}
+            </a>
+          </li>
+        {% empty %}
+          <li>No programs found.</li>
+        {% endfor %}
+      </ul>
+
+      <h5>🔹 Colleges</h5>
+      <ul>
+        {% for c in colleges %}
+          <li>
+            <a href="{% url 'college-update' c.id %}">
+              {{ c.college_code }} - {{ c.college_name }}
+            </a>
+          </li>
+        {% empty %}
+          <li>No colleges found.</li>
+        {% endfor %}
+      </ul>
+
+      <h5>🔹 Organization Members</h5>
+      <ul>
+        {% for m in organization_members %}
+          <li>
+            <a href="{% url 'organization-member-update' m.id %}">
+              {{ m.student.lastname }}, {{ m.student.firstname }} - {{ m.organization.org_name }}
+            </a>
+          </li>
+        {% empty %}
+          <li>No organization members found.</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">Enter a search term above to find results.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
