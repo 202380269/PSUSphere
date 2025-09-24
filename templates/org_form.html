@@ -1,27 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">
-            {% if object %}Update Organization{% else %}Add New Organization{% endif %}
-        </h4>
+        <h4 class="page-title">Organizations</h4>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">
-                            {% if object %}Update Organization{% else %}Add New Organization{% endif %}
-                        </div>
+                        <div class="card-title">{% if form.instance.pk %}Update Organization{% else %}Add Organization{% endif %}</div>
+                        <div class="card-category">Page Subtitle</div>
                     </div>
                     <div class="card-body">
                         <form method="post" novalidate>
                             {% csrf_token %}
-                            {% include 'includes/form.html' %}
+                            <div class="form-group">
+                                <label for="{{ form.name.id_for_label }}">Name</label>
+                                {% render_field form.name class="form-control" %}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.description.id_for_label }}">Description</label>
+                                {% render_field form.description class="form-control" %}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.college.id_for_label }}">College</label>
+                                {% render_field form.college class="form-control" %}
+                            </div>
                             <div class="form-group mt-3">
                                 <button type="submit" class="btn btn-primary btn-rounded">
-                                    {% if object %}Update{% else %}Submit{% endif %}
+                                    {% if form.instance.pk %}Update{% else %}Submit{% endif %}
                                 </button>
                                 <a href="{% url 'organization-list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
                             </div>
