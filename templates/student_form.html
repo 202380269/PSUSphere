@@ -7,7 +7,6 @@
         <h4 class="page-title">
             {% if object %}Update Student{% else %}Add New Student{% endif %}
         </h4>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -15,9 +14,7 @@
                         <div class="card-title">
                             {% if object %}Update Student{% else %}Add New Student{% endif %}
                         </div>
-                        <div class="card-category">Page Subtitle</div>
                     </div>
-
                     <div class="card-body">
                         <form method="post" novalidate>
                             {% csrf_token %}
@@ -26,11 +23,10 @@
                                 <button type="submit" class="btn btn-primary btn-rounded">
                                     {% if object %}Update{% else %}Submit{% endif %}
                                 </button>
-                                <a href="{% url 'student-add' %}" class="btn btn-secondary btn-rounded">Cancel</a>
+                                <a href="{% url 'student-list' %}" class="btn btn-secondary btn-rounded">Cancel</a>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
